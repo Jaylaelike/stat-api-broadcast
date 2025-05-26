@@ -40,3 +40,39 @@ export const getIrdDataByStation = async (station: string): Promise<IrdData[]> =
     throw new Error("Error fetching filtered IRD data from database.");
   }
 };
+
+export interface DailyReporterData {
+  Engineering_center: string | null;
+  Station: string | null;
+  Status_: string | null;
+  ip: string | null;
+  Transmistion_Brand: string | null;
+  No: string | null;
+  Facility: string | null;
+  Station_Eng: string | null;
+  Station_Thai: string | null;
+  Station_Type: string | null;
+  Eng_No: number | null;
+  Eng_No_n: number | null;
+  TX_ANT: string | null;
+  RF_Power: number | null; // decimal(10,2)
+  SFN: string | null;
+  Emission: string | null;
+  Downtime: string | null;
+  PEA: string | null;
+  GEN: string | null;
+  Feul_M: number | null; // decimal(10,2)
+  Feul_A: string | null;
+  [key: string]: any; 
+}
+
+export const getAllDailyReporterData = async (): Promise<DailyReporterData[]> => {
+  const query = "SELECT * FROM `daily_reporter`;";
+  try {
+    const [results] = await pool.query(query);
+    return results as DailyReporterData[];
+  } catch (error) {
+    console.error("Error executing getAllDailyReporterData query:", error);
+    throw new Error("Error fetching daily reporter data from database.");
+  }
+};
