@@ -336,4 +336,73 @@ router.get('/api/daily_reporter', irdController.getDailyReporterController);
  */
 router.get('/api/engineering_center', irdController.getEngineeringCenterController);
 
+/**
+ * @swagger
+ * tags:
+ *   name: CiscoSW
+ *   description: Cisco Switch data management
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     CiscoSWData:
+ *       type: object
+ *       properties:
+ *         time:
+ *           type: string
+ *           format: date-time 
+ *           nullable: true
+ *           description: Timestamp of the record.
+ *         Center:
+ *           type: string
+ *           nullable: true
+ *           description: Center name.
+ *         Station:
+ *           type: string
+ *           nullable: true
+ *           description: Station name.
+ *         Device_name:
+ *           type: string
+ *           nullable: true
+ *           description: Name of the Cisco device.
+ *         IP:
+ *           type: string
+ *           format: ipv4 
+ *           nullable: true
+ *           description: IP address of the device.
+ *         Status:
+ *           type: string
+ *           nullable: true
+ *           description: Status of the device.
+ *       example:
+ *         time: "2023-10-27T10:30:00Z"
+ *         Center: "DataCenter Core"
+ *         Station: "Network Rack 1"
+ *         Device_name: "CoreSwitch01"
+ *         IP: "192.168.1.1"
+ *         Status: "Online"
+ */
+
+/**
+ * @swagger
+ * /api/cisco_sw:
+ *   get:
+ *     summary: Retrieve a list of all Cisco switch data entries, ordered by time descending.
+ *     tags: [CiscoSW]
+ *     responses:
+ *       200:
+ *         description: A list of Cisco switch data entries.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/CiscoSWData'
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get('/api/cisco_sw', irdController.getCiscoSWController);
+
 export default router;

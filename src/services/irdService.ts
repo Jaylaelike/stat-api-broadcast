@@ -102,3 +102,24 @@ export const getAllEngineeringCenterData = async (): Promise<EngineeringCenterDa
     throw new Error("Error fetching engineering center data from database.");
   }
 };
+
+export interface CiscoSWData {
+  time: string | null;
+  Center: string | null;
+  Station: string | null;
+  Device_name: string | null;
+  IP: string | null;
+  Status: string | null;
+  [key: string]: any; // To allow for any other fields not explicitly defined
+}
+
+export const getAllCiscoSWData = async (): Promise<CiscoSWData[]> => {
+  const query = "SELECT * FROM `cisco_sw` ORDER BY `time` DESC;";
+  try {
+    const [results] = await pool.query(query);
+    return results as CiscoSWData[];
+  } catch (error) {
+    console.error("Error executing getAllCiscoSWData query:", error);
+    throw new Error("Error fetching Cisco SW data from database.");
+  }
+};

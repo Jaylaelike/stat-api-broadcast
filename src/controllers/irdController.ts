@@ -11,6 +11,16 @@ export const getIrdAllController = async (req: Request, res: Response): Promise<
   }
 };
 
+export const getCiscoSWController = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const data = await irdService.getAllCiscoSWData();
+    res.json(data);
+  } catch (error: any) {
+    console.error("Controller error in getCiscoSWController:", error.message);
+    res.status(500).json({ error: "Internal Server Error", message: error.message });
+  }
+};
+
 export const getEngineeringCenterController = async (req: Request, res: Response): Promise<void> => {
   try {
     const data = await irdService.getAllEngineeringCenterData();
