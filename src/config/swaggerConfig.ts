@@ -13,7 +13,7 @@ const options: swaggerJsdoc.Options = {
     },
     servers: [
       {
-        url: `http://localhost:${process.env.PORT || 3000}`, // Adjusted to remove /api, as routes already include it
+        url: `http://172.16.202.63:${process.env.PORT || 3004}`, // Adjusted to remove /api, as routes already include it
       },
     ],
   },
