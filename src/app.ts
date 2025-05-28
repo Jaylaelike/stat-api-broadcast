@@ -1,5 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
 
 // Load environment variables
 dotenv.config();
@@ -7,6 +9,7 @@ dotenv.config();
 const app: Application = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

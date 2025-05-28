@@ -405,4 +405,71 @@ router.get('/api/engineering_center', irdController.getEngineeringCenterControll
  */
 router.get('/api/cisco_sw', irdController.getCiscoSWController);
 
+/**
+ * @swagger
+ * /api/cisco_sw_join_eng_center:
+ *   get:
+ *     summary: Retrieve Cisco switch data joined with engineering center data for a specific station
+ *     tags: [CiscoSW]
+ *     responses:
+ *       200:
+ *         description: A list of Cisco switch data entries joined with engineering center data for the specified station.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/CiscoSWDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station parameter is required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get('/api/cisco_sw_join_eng_center', irdController.getCiscoSwJoinEngCenterController);
+
+/**
+ * @swagger
+ * /api/ird_harmonic_join_eng_center:
+ *   get:
+ *     summary: Retrieve Cisco switch data joined with engineering center data for a specific station
+ *     tags: [CiscoSW]
+ *     responses:
+ *       200:
+ *         description: A list of Cisco switch data entries joined with engineering center data for the specified station.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/CiscoSWDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station parameter is required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get('/api/ird_harmonic_join_eng_center', irdController.getIrdDataWithEngineeringCenterController);
+
+/**
+ * @swagger
+ * /api/tx_control_with_eng_center:
+ *   get:
+ *     summary: Retrieve a list of IRD harmonic data entries joined with engineering center data
+ *     tags: [TXControl]
+ *     responses:
+ *       200:
+ *         description: A list of IRD harmonic data entries joined with engineering center data.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/IrdDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station parameter is required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get('/api/tx_control_with_eng_center', irdController.getNecTxControlWithEngineeringCentercontroller);
+
 export default router;
+
