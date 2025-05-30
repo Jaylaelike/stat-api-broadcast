@@ -159,3 +159,84 @@ export const getNecTxControlWithEngineeringCentercontroller = async (
       .json({ error: "Internal Server Error", message: error.message });
   }
 };
+
+export const getTxtRedessDataWithEngineeringCenterController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const results = await irdService.getTxtRedessDataWithEngineeringCenter();
+    const data = {
+      orders: results,
+    };
+    res.json(data);
+  } catch (error: any) {
+    console.error(
+      "Controller error in getTxtRedessDataWithEngineeringCenterController:",
+      error.message
+    );
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+}
+
+export const getDistinctStationThaiByTreedreesBrandController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const results = await irdService.getDistinctStationThaiByTreedreesBrand();
+    const data = {
+      orders: results,
+    };
+    res.json(data);
+  } catch (error: any) {
+    console.error(
+      "Controller error in getDistinctStationThaiByTreedreesBrandController:",
+      error.message
+    );
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+}
+
+
+
+export const getTxTreedressRangeDataController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { station, range, state } = req.params;
+
+  if (!station || !range || !state) {
+    res
+      .status(400)
+      .json({
+        error: "Bad Request",
+        message: "Station, range, and state parameters are required.",
+      });
+    return;
+  }
+
+  try {
+    const results = await irdService.getTxTreedressRangeData(
+      station,
+      range,
+      state
+    );
+    const data = {
+      orders: results,
+    };
+    res.json(data);
+  } catch (error: any) {
+    console.error("Controller error in getTxTreedressRangeDataController:", error.message);
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+}
+
+
+

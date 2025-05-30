@@ -8,7 +8,7 @@ const pool = mysql.createPool({
   user: "thaipbs",
   password: "thaipbs",
   database: "broadcast_monitor",
-  port: parseInt(process.env.PORT || "3306"),
+  port: parseInt(process.env.DB_PORT || "3306"),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0

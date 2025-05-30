@@ -471,5 +471,98 @@ router.get('/api/ird_harmonic_join_eng_center', irdController.getIrdDataWithEngi
  */
 router.get('/api/tx_control_with_eng_center', irdController.getNecTxControlWithEngineeringCentercontroller);
 
+
+/**
+ * @swagger
+ * /api/tx_treedress_all:
+ *   get:
+ *     summary: Retrieve a list of Treedress data entries joined with engineering center data
+ *     tags: [Treedress]
+ *     responses:
+ *       200:
+ *         description: A list of Treedress data entries joined with engineering center data.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/TreedressDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station parameter is required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get('/api/tx_treedress_all', irdController.getTxtRedessDataWithEngineeringCenterController);
+
+/**
+ * @swagger
+ * /api/tx_treedress_list:
+ *   get:
+ *     summary: Retrieve a list of Treedress data entries joined with engineering center data for a specific station
+ *     tags: [Treedress]
+ *     responses:
+ *       200:
+ *         description: A list of Treedress data entries joined with engineering center data for the specified station.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/TreedressDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station parameter is required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get('/api/tx_treedress_list', irdController.getDistinctStationThaiByTreedreesBrandController);
+
+
+/**
+ * @swagger
+ * /api/treedress_txcontrol_range/{station}/{range}/{state}:
+ *   get:
+ *     summary: Retrieve Treedress data entries joined with engineering center data for a specific station and range and state 
+ *     tags: [Treedress]
+ *     parameters:
+ *       - in: path
+ *         name: station
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The Thai name of the station (e.g., กรุงเทพ)
+ *       - in: path
+ *         name: range
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The range of the data (e.g., 1-100)
+ *       - in: path
+ *         name: state
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The state of the data (e.g., active, inactive)
+ *     responses:
+ *       200:
+ *         description: A list of Treedress data entries joined with engineering center data for the specified station, range, and state.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/TreedressDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station, range, and state parameters are required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get('/api/treedress_txcontrol_range/:station/:range/:state', irdController.getTxTreedressRangeDataController);
+
+
+
+
+
+
+
 export default router;
 

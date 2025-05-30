@@ -245,7 +245,7 @@ export const getIrdDataWithEngineeringCenter = async (): Promise<
   }
 };
 
-// reate service join between `nec_tx_control ` and `engineering_center_new` by index is Station field
+// create service join between `nec_tx_control ` and `engineering_center_new` by index is Station field
 export interface NecTxControlJoinEngCenter {
   time: string | null;
   Station: string | null;
@@ -305,5 +305,176 @@ export const getNecTxControlWithEngineeringCenter = async (): Promise<
     throw new Error(
       "Error fetching NEC TX Control data with Engineering Center from database."
     );
+  }
+};
+
+//create service join between `treedes ` and `engineering_center_new` by index is Station field
+export interface TxtRedessDataJoinEngCenter {
+  time: string | null;
+  Station: string | null;
+  Engineering_center: string | null;
+  ip: string | null;
+  Transmistion_Brand: string | null;
+  No: string | null;
+  Facility: string | null;
+  Station_Eng: string | null;
+  Station_Thai: string | null;
+  Station_Type: string | null;
+  Eng_No: number | null;
+  Eng_No_n: number | null;
+  TX_ANT: string | null;
+  RF_Power: number | null; // decimal(10,2)
+  SFN: string | null;
+  Emission: string | null;
+  Downtime: string | null;
+  PEA: string | null;
+  GEN: string | null;
+  Feul_M: number | null; // decimal(10,2)
+  Feul_A: string | null;
+
+  //this is the treedes table fields
+
+  Center: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  Device_Name: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  IP: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  Reverse_Power: number | null; // decimal(10,2)
+  Temp_Amp: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  Temp_Modula: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  Status: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+
+  [key: string]: any; // To allow for any other fields not explicitly defined
+}
+export const getTxtRedessDataWithEngineeringCenter = async (): Promise<
+  TxtRedessDataJoinEngCenter[]
+> => {
+  const query = `
+    SELECT txt.*, ec.Engineering_center, ec.ip, ec.Transmistion_Brand, 
+           ec.No, ec.Facility, ec.Station_Eng, ec.Station_Thai, 
+           ec.Station_Type, ec.Eng_No
+    FROM treedes AS txt 
+    INNER JOIN engineering_center_new AS ec ON txt.Station = ec.Station 
+    ORDER BY txt.time DESC;
+  `;
+  try {
+    const [results] = await pool.query(query);
+    return results as TxtRedessDataJoinEngCenter[];
+  } catch (error) {
+    console.error(
+      "Error executing getTxtRedessDataWithEngineeringCenter query:",
+      error
+    );
+    throw new Error(
+      "Error fetching TxtRedess data with Engineering Center from database."
+    );
+  }
+};
+
+// Create services of `SELECT DISTINCT(Station_Thai) FROM engineering_center_new WHERE Transmistion_Brand = 'TREDESS' ORDER BY engineering_center_new.Transmistion_Brand ASC`
+export interface TransmissionBrand {
+  time: string | null;
+  Station: string | null;
+  Engineering_center: string | null;
+  ip: string | null;
+  Transmistion_Brand: string | null;
+  No: string | null;
+  Facility: string | null;
+  Station_Eng: string | null;
+  Station_Thai: string | null;
+  Station_Type: string | null;
+  Eng_No: number | null;
+  Eng_No_n: number | null;
+  TX_ANT: string | null;
+  RF_Power: number | null; // decimal(10,2)
+  SFN: string | null;
+  Emission: string | null;
+  Downtime: string | null;
+  PEA: string | null;
+  GEN: string | null;
+  Feul_M: number | null; // decimal(10,2)
+  Feul_A: string | null;
+
+  [key: string]: any; // To allow for any other fields not explicitly defined
+}
+
+export const getDistinctStationThaiByTreedreesBrand = async (): Promise<
+  TransmissionBrand[]
+> => {
+  const query = `
+    SELECT DISTINCT Station_Thai 
+    FROM engineering_center_new 
+    WHERE Transmistion_Brand = 'TREDESS'
+    ORDER BY Transmistion_Brand ASC;
+  `;
+  try {
+    const [results] = await pool.query(query);
+    return results as TransmissionBrand[];
+  } catch (error) {
+    console.error(
+      "Error executing getDistinctStationThaiByTreedreesBrand query:",
+      error
+    );
+    throw new Error(
+      "Error fetching distinct Station_Thai by TREDESS brand from database."
+    );
+  }
+};
+
+export interface TxTreedressRangeData {
+  time: string | null;
+  Station: string | null;
+  Engineering_center: string | null;
+  ip: string | null;
+  Transmistion_Brand: string | null;
+  No: string | null;
+  Facility: string | null;
+  Station_Eng: string | null;
+  Station_Thai: string | null;
+  Station_Type: string | null;
+  Eng_No: number | null;
+  Eng_No_n: number | null;
+  TX_ANT: string | null;
+  RF_Power: number | null; // decimal(10,2)
+  SFN: string | null;
+  Emission: string | null;
+  Downtime: string | null;
+  PEA: string | null;
+  GEN: string | null;
+  Feul_M: number | null; // decimal(10,2)
+  Feul_A: string | null;
+
+  //this is the auto_insert_txtredess table fields
+
+  Center: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  Device_Name: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  IP: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  Reverse_Power: number | null; // decimal(10,2)
+  Temp_Amp: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  Temp_Modula: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+  Status: string | null; // Assuming this field exists in the `auto_insert_txtredess` table
+
+  [key: string]: any; // To allow for any other fields not explicitly defined
+}
+export const getTxTreedressRangeData = async (
+  station: string,
+  range: string,
+  state: string
+): Promise<TxTreedressRangeData[]> => {
+  const query = `
+    SELECT txt.*, ec.Engineering_center, ec.ip, ec.Transmistion_Brand, 
+           ec.No, ec.Facility, ec.Station_Eng, ec.Station_Thai, 
+           ec.Station_Type, ec.Eng_No
+    FROM engineering_center_new AS ec 
+    JOIN auto_insert_txtredess AS txt ON ec.station = txt.Station 
+    WHERE ec.Station_Thai = ? 
+      AND txt.time >= NOW() - INTERVAL ? DAY 
+      AND txt.Device_Name = ? 
+    ORDER BY txt.time DESC;
+  `;
+  try {
+    const [results] = await pool.query(query, [station, range, state]);
+    return results as TxTreedressRangeData[];
+  } catch (error) {
+    console.error("Error executing getTxTreedressRangeData query:", error);
+    throw new Error("Error fetching Tx Treedress range data from database.");
   }
 };
