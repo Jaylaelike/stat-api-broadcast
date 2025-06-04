@@ -1,7 +1,7 @@
 import app from './app';
 import pool from './config/database'; // Ensures database connection is initialized
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3004;
 
 // Test database connection by getting a connection from the pool
 pool.getConnection()
