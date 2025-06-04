@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import * as irdController from '../controllers/irdController';
+import { Router } from "express";
+import * as irdController from "../controllers/irdController";
 
 const router = Router();
 
@@ -102,7 +102,7 @@ const router = Router();
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/ird_all', irdController.getIrdAllController);
+router.get("/api/ird_all", irdController.getIrdAllController);
 
 /**
  * @swagger
@@ -129,7 +129,7 @@ router.get('/api/ird_all', irdController.getIrdAllController);
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/ird_filter/:station', irdController.getIrdFilterController);
+router.get("/api/ird_filter/:station", irdController.getIrdFilterController);
 
 /**
  * @swagger
@@ -186,7 +186,7 @@ router.get('/api/ird_filter/:station', irdController.getIrdFilterController);
  *           nullable: true
  *         RF_Power:
  *           type: number
- *           format: float 
+ *           format: float
  *           nullable: true
  *         SFN:
  *           type: string
@@ -205,7 +205,7 @@ router.get('/api/ird_filter/:station', irdController.getIrdFilterController);
  *           nullable: true
  *         Feul_M:
  *           type: number
- *           format: float 
+ *           format: float
  *           nullable: true
  *         Feul_A:
  *           type: string
@@ -252,7 +252,7 @@ router.get('/api/ird_filter/:station', irdController.getIrdFilterController);
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/daily_reporter', irdController.getDailyReporterController);
+router.get("/api/daily_reporter", irdController.getDailyReporterController);
 
 /**
  * @swagger
@@ -285,7 +285,7 @@ router.get('/api/daily_reporter', irdController.getDailyReporterController);
  *           nullable: true
  *         No:
  *           type: number
- *           format: float 
+ *           format: float
  *           nullable: true
  *         Facility:
  *           type: string
@@ -308,7 +308,7 @@ router.get('/api/daily_reporter', irdController.getDailyReporterController);
  *         Status: "Operational"
  *         ip: "10.0.0.1"
  *         Transmistion_Brand: "ReliableTransmissions"
- *         No: 12.34 
+ *         No: 12.34
  *         Facility: "Primary Site"
  *         Station_Eng: "Central Stn ENG"
  *         Station_Thai: "สถานีกลาง"
@@ -334,7 +334,10 @@ router.get('/api/daily_reporter', irdController.getDailyReporterController);
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/engineering_center', irdController.getEngineeringCenterController);
+router.get(
+  "/api/engineering_center",
+  irdController.getEngineeringCenterController
+);
 
 /**
  * @swagger
@@ -352,7 +355,7 @@ router.get('/api/engineering_center', irdController.getEngineeringCenterControll
  *       properties:
  *         time:
  *           type: string
- *           format: date-time 
+ *           format: date-time
  *           nullable: true
  *           description: Timestamp of the record.
  *         Center:
@@ -369,7 +372,7 @@ router.get('/api/engineering_center', irdController.getEngineeringCenterControll
  *           description: Name of the Cisco device.
  *         IP:
  *           type: string
- *           format: ipv4 
+ *           format: ipv4
  *           nullable: true
  *           description: IP address of the device.
  *         Status:
@@ -403,7 +406,7 @@ router.get('/api/engineering_center', irdController.getEngineeringCenterControll
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/cisco_sw', irdController.getCiscoSWController);
+router.get("/api/cisco_sw", irdController.getCiscoSWController);
 
 /**
  * @swagger
@@ -425,7 +428,10 @@ router.get('/api/cisco_sw', irdController.getCiscoSWController);
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/cisco_sw_join_eng_center', irdController.getCiscoSwJoinEngCenterController);
+router.get(
+  "/api/cisco_sw_join_eng_center",
+  irdController.getCiscoSwJoinEngCenterController
+);
 
 /**
  * @swagger
@@ -447,7 +453,10 @@ router.get('/api/cisco_sw_join_eng_center', irdController.getCiscoSwJoinEngCente
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/ird_harmonic_join_eng_center', irdController.getIrdDataWithEngineeringCenterController);
+router.get(
+  "/api/ird_harmonic_join_eng_center",
+  irdController.getIrdDataWithEngineeringCenterController
+);
 
 /**
  * @swagger
@@ -469,8 +478,10 @@ router.get('/api/ird_harmonic_join_eng_center', irdController.getIrdDataWithEngi
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/tx_control_with_eng_center', irdController.getNecTxControlWithEngineeringCentercontroller);
-
+router.get(
+  "/api/tx_control_with_eng_center",
+  irdController.getNecTxControlWithEngineeringCentercontroller
+);
 
 /**
  * @swagger
@@ -492,7 +503,10 @@ router.get('/api/tx_control_with_eng_center', irdController.getNecTxControlWithE
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/tx_treedress_all', irdController.getTxtRedessDataWithEngineeringCenterController);
+router.get(
+  "/api/tx_treedress_all",
+  irdController.getTxtRedessDataWithEngineeringCenterController
+);
 
 /**
  * @swagger
@@ -514,14 +528,16 @@ router.get('/api/tx_treedress_all', irdController.getTxtRedessDataWithEngineerin
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/tx_treedress_list', irdController.getDistinctStationThaiByTreedreesBrandController);
-
+router.get(
+  "/api/tx_treedress_list",
+  irdController.getDistinctStationThaiByTreedreesBrandController
+);
 
 /**
  * @swagger
  * /api/treedress_txcontrol_range/{station}/{range}/{state}:
  *   get:
- *     summary: Retrieve Treedress data entries joined with engineering center data for a specific station and range and state 
+ *     summary: Retrieve Treedress data entries joined with engineering center data for a specific station and range and state
  *     tags: [Treedress]
  *     parameters:
  *       - in: path
@@ -556,13 +572,100 @@ router.get('/api/tx_treedress_list', irdController.getDistinctStationThaiByTreed
  *       500:
  *         description: Internal Server Error
  */
-router.get('/api/treedress_txcontrol_range/:station/:range/:state', irdController.getTxTreedressRangeDataController);
+router.get(
+  "/api/treedress_txcontrol_range/:station/:range/:state",
+  irdController.getTxTreedressRangeDataController
+);
 
+/**
+ * @swagger
+ * /api/plisch_all:
+ *   get:
+ *     summary: Retrieve Plisch SCU data entries joined with engineering center data for a specific station and range and state
+ *     tags: [Plisch]
+ *     responses:
+ *       200:
+ *         description: A list of Plisch SCU data entries joined with engineering center data.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/PlischDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station, range, and state parameters are required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get("/api/plisch_all", irdController.getAllPlischScuDataController);
 
+/**
+ * @swagger
+ * /api/plisch_range/{station}/{range}/{state}:
+ *   get:
+ *     summary: Retrieve Plisch SCU data entries joined with engineering center data for a specific station and range and state
+ *     tags: [Plisch]
+ *     parameters:
+ *       - in: path
+ *         name: station
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The Thai name of the station (e.g., กรุงเทพ)
+ *       - in: path
+ *         name: range
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The range of the data (e.g., 1-100)
+ *       - in: path
+ *         name: state
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The state of the data (e.g., active, inactive)
+ *     responses:
+ *       200:
+ *         description: A list of Plisch SCU data entries joined with engineering center data for the specified station, range, and state.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/PlischDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station, range, and state parameters are required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get(
+  "/api/plisch_range/:station/:range/:state",
+  irdController.getPlischDataRangeController
+);
 
-
-
-
+/**
+ * @swagger
+ * /api/tx_plisch_list:
+ *   get:
+ *     summary: Retrieve a list of Plisch data entries joined with engineering center data for a specific station
+ *     tags: [Plisch]
+ *     responses:
+ *       200:
+ *         description: A list of Plisch data entries joined with engineering center data for the specified station.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/PlischDataJoinEngCenter'
+ *       400:
+ *         description: Bad Request - Station parameter is required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get(
+  "/api/tx_plisch_list",
+  irdController.getDistinctStationThaiByPlischBrandController
+);
 
 export default router;
-

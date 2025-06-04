@@ -74,12 +74,10 @@ export const getIrdFilterController = async (
   const station = req.params.station;
 
   if (!station) {
-    res
-      .status(400)
-      .json({
-        error: "Bad Request",
-        message: "Station parameter is required.",
-      });
+    res.status(400).json({
+      error: "Bad Request",
+      message: "Station parameter is required.",
+    });
     return;
   }
 
@@ -179,7 +177,7 @@ export const getTxtRedessDataWithEngineeringCenterController = async (
       .status(500)
       .json({ error: "Internal Server Error", message: error.message });
   }
-}
+};
 
 export const getDistinctStationThaiByTreedreesBrandController = async (
   req: Request,
@@ -200,9 +198,7 @@ export const getDistinctStationThaiByTreedreesBrandController = async (
       .status(500)
       .json({ error: "Internal Server Error", message: error.message });
   }
-}
-
-
+};
 
 export const getTxTreedressRangeDataController = async (
   req: Request,
@@ -211,12 +207,10 @@ export const getTxTreedressRangeDataController = async (
   const { station, range, state } = req.params;
 
   if (!station || !range || !state) {
-    res
-      .status(400)
-      .json({
-        error: "Bad Request",
-        message: "Station, range, and state parameters are required.",
-      });
+    res.status(400).json({
+      error: "Bad Request",
+      message: "Station, range, and state parameters are required.",
+    });
     return;
   }
 
@@ -231,12 +225,87 @@ export const getTxTreedressRangeDataController = async (
     };
     res.json(data);
   } catch (error: any) {
-    console.error("Controller error in getTxTreedressRangeDataController:", error.message);
+    console.error(
+      "Controller error in getTxTreedressRangeDataController:",
+      error.message
+    );
     res
       .status(500)
       .json({ error: "Internal Server Error", message: error.message });
   }
-}
+};
 
+export const getAllPlischScuDataController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const results = await irdService.getAllPlischScuData();
+    const data = {
+      orders: results,
+    };
+    res.json(data);
+  } catch (error: any) {
+    console.error(
+      "Controller error in getAllPlischScuDataController:",
+      error.message
+    );
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+};
 
+export const getPlischDataRangeController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { station, range, state } = req.params;
 
+  if (!station || !range || !state) {
+    {
+      res.status(400).json({
+        error: "Bad Request",
+        message: "Station and range parameters are required.",
+      });
+      return;
+    }
+  }
+
+  try {
+    const results = await irdService.getPlischDataRange(station, range, state);
+    const data = {
+      orders: results,
+    };
+    res.json(data);
+  } catch (error: any) {
+    console.error(
+      "Controller error in getPlischDataRangeController:",
+      error.message
+    );
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+};
+
+export const getDistinctStationThaiByPlischBrandController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const results = await irdService.getDistinctStationThaiByPlischBrand();
+    const data = {
+      orders: results,
+    };
+    res.json(data);
+  } catch (error: any) {
+    console.error(
+      "Controller error in getDistinctStationThaiByPlischBrandController:",
+      error.message
+    );
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+};
